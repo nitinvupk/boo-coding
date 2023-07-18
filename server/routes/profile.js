@@ -1,32 +1,9 @@
-'use strict';
+const ProfileRouter = require('express').Router();
+const ProfileController = require('../controllers/profile.controller');
 
-const express = require('express');
-const router = express.Router();
+ProfileRouter.get('/:id?', ProfileController.getProfile);
+ProfileRouter.post('/', ProfileController.createProfile);
+ProfileRouter.patch('/', ProfileController.updateProfile);
 
-const profiles = [
-  {
-    "id": 1,
-    "name": "A Martinez",
-    "description": "Adolph Larrue Martinez III.",
-    "mbti": "ISFJ",
-    "enneagram": "9w3",
-    "variant": "sp/so",
-    "tritype": 725,
-    "socionics": "SEE",
-    "sloan": "RCOEN",
-    "psyche": "FEVL",
-    "image": "https://soulverse.boo.world/images/1.png",
-  }
-];
-
-module.exports = function() {
-
-  router.get('/*', function(req, res, next) {
-    res.render('profile_template', {
-      profile: profiles[0],
-    });
-  });
-
-  return router;
-}
+module.exports = ProfileRouter;
 
